@@ -118,4 +118,8 @@ module.exports = class AWSClientS3 extends S3Client {
 		});
 		return await this.send(command);
 	}
+	async listBuckets() {
+		const command = new ListBucketsCommand();
+		return this.send(command);
+	}
 };
