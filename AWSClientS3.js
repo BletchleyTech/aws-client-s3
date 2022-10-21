@@ -1,4 +1,4 @@
-const { S3Client, GetObjectCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command, CreateBucketCommand, GetBucketVersioningCommand, DeleteBucketCommand, ListBucketsCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const AWSClientS3Error = require("./AWSClientS3Error");
 
@@ -71,6 +71,17 @@ module.exports = class AWSClientS3 extends S3Client {
 			Bucket: objectParams.bucket,
 			Key: objectParams.key,
 			Body: file
+		});
+		return await this.send(command);
+	}
+	async deleteFile(objectParams) {
+		if (!(objectParams.bucket && objectParams.key)) throw new AWSClientS3Error({
+			message: "Couldn't delete file",
+			error: "Missing object-to-delete origin bucket and/or key"
+		});
+		const command = new DeleteObjectCommand({
+			Bucket: objectParams.bucket,
+			Key: objectParams.key
 		});
 		return await this.send(command);
 	}
