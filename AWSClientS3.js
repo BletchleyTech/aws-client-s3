@@ -85,4 +85,13 @@ module.exports = class AWSClientS3 extends S3Client {
 		});
 		return await this.send(command);
 	}
+	async listBucketObjects(bucketName, prefix=null) {
+		if (typeof bucketName !== "string") throw new TypeError("Parameter 'bucketName' must be of type string");
+		else if (!bucketName.trim()) throw new RangeError("Parameter 'bucketName' cannot be an empty string");
+		const command = new ListObjectsV2Command({
+			Bucket: bucketName,
+			Prefix: prefix
+		});
+		return await this.send(command);
+	}
 };
