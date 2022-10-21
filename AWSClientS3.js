@@ -94,4 +94,15 @@ module.exports = class AWSClientS3 extends S3Client {
 		});
 		return await this.send(command);
 	}
+	async createBucket(bucketName, bucketOptions=null) {
+		if (!bucketName) throw new AWSClientS3Error({
+			message:" Couldn't create new bucket on S3",
+			error: "Missing bucket-to-create name"
+		});
+		const command = new CreateBucketCommand({ 
+			...bucketOptions,
+			Bucket: bucketName
+		});
+		return await this.send(command);
+	}
 };
