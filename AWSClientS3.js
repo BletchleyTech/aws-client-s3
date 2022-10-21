@@ -105,4 +105,17 @@ module.exports = class AWSClientS3 extends S3Client {
 		});
 		return await this.send(command);
 	}
+	async deleteBucket(bucketName) {
+		const { status: isBucketVersioningEnabled } = await this.send(new GetBucketVersioningCommand({
+			Bucket: bucketName
+		}));
+		if (isBucketVersioningEnabled) throw new AWSClientS3({
+			message: "Couldn't delete bucket",
+			error: "Cannot programatically delete versioning-enabled bucket. Use the AWS Console or the AWS CLI for this operation"
+		});
+		const command = new DeleteBucketCommand({
+			Bucket: bucketName
+		});
+		return await this.send(command);
+	}
 };
