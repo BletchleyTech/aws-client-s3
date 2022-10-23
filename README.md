@@ -9,7 +9,6 @@ AWS Client S3 is built on top of AWS' official S3 SDK client. You can check out 
 - [Installation](#installation)
 - [Introduction](#introduction)
 - [Usage](#usage)
-	- [Methods](#methods)
 - [License](#license)
 
 ## **Installation**
