@@ -50,12 +50,12 @@ module.exports = class AWSClientS3 extends S3Client {
 		});
 		const { Body: fileBodyStream } = await this.send(command);
 		switch (returnType) {
-			case "stream":
-				return fileBodyStream;
-			case "string":
-				return await streamtoString(fileBodyStream);
-			case "buffer":
-				return await streamToBuffer(fileBodyStream);
+		case "stream":
+			return fileBodyStream;
+		case "string":
+			return await streamtoString(fileBodyStream);
+		case "buffer":
+			return await streamToBuffer(fileBodyStream);
 		}
 	}
 	async uploadFile(file, objectParams) {

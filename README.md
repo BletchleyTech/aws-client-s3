@@ -1,5 +1,9 @@
 # **AWS Client S3**
 
+![npm package version "npm version"](https://img.shields.io/npm/v/aws-client-s3)
+![License "License"](https://img.shields.io/npm/l/aws-client-s3)
+![npm downloads "npm downloads"](https://img.shields.io/npm/dw/aws-client-s3)
+
 AWS Client S3 is a developer-friendly Node.js client for Amazon Web Service's Simple Storage Service (AWS S3).
 
 AWS Client S3 is built on top of AWS' official S3 SDK client. You can check out Amazon's official S3 client [here](https://npmjs.com/package/@aws-sdk/client-s3).
