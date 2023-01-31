@@ -17,6 +17,6 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@3
+      uses: actions/checkout@v3
 
     - run: npx jsdoc . -c jsdoc.config.json
