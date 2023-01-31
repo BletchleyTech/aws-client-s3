@@ -8,7 +8,6 @@
 	"opts": {
 		"template": "templates/default",
 		"encoding": "utf8",
-		"package": "./package.json",
 		"destination": "./docs/",
 		"readme": "./README.md"
 	}
