@@ -294,4 +294,4 @@ client.listBuckets()
 
 ## **License**
 
-AWS Client S3 is licensed under the MIT license (see the [LICENSE](LICENSE) file for more information).
+AWS Client S3 is licensed under the MIT license (see the [LICENSE](/LICENSE) file for more information).
