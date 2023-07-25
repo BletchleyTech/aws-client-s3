@@ -1,6 +1,6 @@
 {
 	"name": "aws-client-s3",
-	"version": "1.4.5",
+	"version": "1.4.6",
 	"description": "A developer-friendly Node.js client for AWS S3",
 	"main": "AWSClientS3.js",
 	"repository": {
