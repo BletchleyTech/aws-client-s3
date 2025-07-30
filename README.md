@@ -115,6 +115,36 @@ client.getPresignedUrl({
 1. [GetObjectCommand](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getobjectcommand.html) (class)
 2. [getSignedUrl](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html#getsignedurl-1) (function)
 
+### **createPresignedUrl()**
+
+The `getPresignedUrl()` method has one required parameter `objectParams` (an object containing two keys, `bucket` and `key`) and will return a Presigned URL that provides users with time-limited access to the specified object for the action/command defined in the `commandType`. parameter.
+
+If the `objectParams` parameter is missing the bucket and/or key for the object, the method will throw an AWSClientS3Error instance with information on why the operation failed.
+
+The second parameter `commandType`, which is optional, defines how the generated URL may interact with the object specified in `objectParams`. Available values are `get` and `put`, which allow to read/view an existing file or upload a file the specified location in the bucket, respectively.
+
+The third, optional parameter `presignedUrlOptions`, is an object that specifies configuration options for the resulting URL. You can review these options [here](https://github.com/BletchleyTech/aws-client-s3/issues).
+
+```javascript
+const presignedUrl = await client.createPresignedUrl({
+	bucket: "bucketName",
+	key: "objectKey"
+}, "get");
+
+// Or handle it as a Promise
+
+client.createPresignedUrl({
+	bucket: "bucketName",
+	key: "objectKey"
+}, "get")
+.then(presignedUrl => {})
+.catch(err => {});
+```
+
+#### **Related classes/methods/functions**
+
+1. [getSignedUrl](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html#getsignedurl-1) (function)
+
 ### **readFile()**
 
 The `readFile()` method allows you to programatically access the contents of an S3 object inside your application. This is especially useful over `getPresignedUrl()` when you want to integrate an existing file into your application. 

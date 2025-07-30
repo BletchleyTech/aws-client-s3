@@ -79,7 +79,7 @@ class AWSClientS3 extends S3Client {
      * @throws Will throw an Error if required arguments are missing
      * @returns {Promise<string>} Promise which resolves to the pre-signed URL for the specified bucket and key
      */
-    async createPresignedUrl(objectParams, presignedUrlOptions=null, commandType="get") {
+    async createPresignedUrl(objectParams, commandType="get", presignedUrlOptions=null) {
         if (!(objectParams.bucket && objectParams.key)) throw new AWSClientS3Error({
             message: "Couldn't generate pre-signed URL",
             error: "Missing object bucket and/or key"
