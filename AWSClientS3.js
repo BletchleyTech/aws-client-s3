@@ -70,6 +70,44 @@ class AWSClientS3 extends S3Client {
 		return await getSignedUrl(this, command, presignedUrlOptions);
 	}
 	/**
+     * Returns pre-signed URL for specific S3 object
+     * @param {object} objectParams - Target object's location data (bucket and key)
+     * @param {string} objectParams.bucket - Target object's bucket
+     * @param {string} objectParams.key - Target object's key
+     * @param {object} [presignedUrlOptions] - Config options for resultant pre-signed URL
+     * @param {string} [commandType="get"] - S3 command to create for the provided bucket and key
+     * @throws Will throw an Error if required arguments are missing
+     * @returns {Promise<string>} Promise which resolves to the pre-signed URL for the specified bucket and key
+     */
+    async createPresignedUrl(objectParams, presignedUrlOptions=null, commandType="get") {
+        if (!(objectParams.bucket && objectParams.key)) throw new AWSClientS3Error({
+            message: "Couldn't generate pre-signed URL",
+            error: "Missing object bucket and/or key"
+        });
+        let command = null;
+        switch (commandType) {
+            case "put":
+                command = new PutObjectCommand({
+                    Bucket: objectParams.bucket,
+                    Key: objectParams.key
+                });
+                break;
+            case "get":
+                command = new GetObjectCommand({
+                    Bucket: objectParams.bucket,
+                    Key: objectParams.key
+                });
+                break;
+            default:
+                command = new GetObjectCommand({
+                    Bucket: objectParams.bucket,
+                    Key: objectParams.key
+                });
+                break;
+        };
+        return await getSignedUrl(this, command, presignedUrlOptions);
+    }
+	/**
 	 * Returns contents of specified S3 object
 	 * @param {object} objectParams - Target object's location data (bucket and key)
 	 * @param {string} objectParams.bucket - Target object's bucket
